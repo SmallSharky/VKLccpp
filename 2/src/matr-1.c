@@ -129,7 +129,7 @@ int ** freadmatr(const char * fname, int * width, int * height)
 	int w, h;
 	w = atoi(w_str);
 	h = atoi(h_str);
-	printf("WIDTH: %d\nHEIGHT:%d\n", w, h);
+	//printf("WIDTH: %d\nHEIGHT:%d\n", w, h);
 	//Освободили память
 	free(wh_str);
 	wh_str = 0;
@@ -197,6 +197,9 @@ int ** freadmatr(const char * fname, int * width, int * height)
 	return retval;
 }
 
+/*
+ * Выводит матрицу на экран
+ * */
 void printmatr(int ** M, int w, int h)
 {
 	int i = 0;
@@ -206,12 +209,40 @@ void printmatr(int ** M, int w, int h)
 
 		while (j < w)
 		{
+			//i - номер строки, j - номер столбца
 			printf("%d ", M[i][j]);
 			j++;
 		}
 		printf("\n");
 		i++;
 	}
+}
+
+/*
+ * Функция "сделать все офигенно"
+ *
+ * Принимает:
+ * 1)Матрицу
+ * 2)ширину матрицы
+ * 3)высоту матрицы
+ *
+ * Возвращает:
+ * ничто
+ *
+ * */
+void do_work(int ** M, int w, int h){
+	//Проверяем, есть ли матрица
+
+	/*написать*/
+
+	//Обходим матрицу, вычисляем произведение, находим номер строки и столбца, где лежит мин. элемент
+
+	/*написать*/
+
+	//Записываем туда, где мин. элемент, произведение
+
+	/*написать*/
+
 }
 
 int main(void)
@@ -221,8 +252,11 @@ int main(void)
 	if (!M)
 		return 10;
 
-	printf("%dx%d\n", w, h);
+	printf("%dx%d\n\n", w, h);
 	printmatr(M, w, h);
+	do_work(M,w,h);
+	printf("\n\n");
+	printmatr(M,w,h);
 
 	return 0;
 }
