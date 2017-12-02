@@ -266,10 +266,11 @@ void do_work(int ** M, int w, int h)
 		}
 		i++;
 	}
-	M[min_i][min_j] = diag_p;
+
 	//Записываем туда, где мин. элемент, произведение
 
-	/*написать*/
+	M[min_i][min_j] = diag_p;
+
 
 }
 
