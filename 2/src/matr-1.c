@@ -210,7 +210,7 @@ void printmatr(int ** M, int w, int h)
 		while (j < w)
 		{
 			//i - номер строки, j - номер столбца
-			printf("%d ", M[i][j]);
+			printf("%d\t", M[i][j]);
 			j++;
 		}
 		printf("\n");
@@ -230,37 +230,66 @@ void printmatr(int ** M, int w, int h)
  * ничто
  *
  * */
-void do_work(int ** M, int w, int h){
+void do_work(int ** M, int w, int h)
+{
 	//Проверяем, есть ли матрица. Если нет - прекращаем работу, сообщив о проблеме.
-
-	/*написать*/
+	//printf("DO_WORK\n");
+	//printf("w: %d, h: %d\n", w, h);
+	if ((!M) || (!w) || (!h)){
+		printf("ERR: NO MATR\n");
+		return;
+	}
 
 	//Проверяем, является ли матрица квадратной. Если нет - прекращаем работу, сообщив о проблеме.
 
-	/*написать*/
+	if (w != h)
+	{
+		printf("ERR: WIDTH != HEIGHT\n");
+	}
 
 	//Обходим матрицу, вычисляем произведение, находим номер строки и столбца, где лежит мин. элемент
 
-	/*написать*/
+	int min_i = 0, min_j = 0, diag_p = 1, i = 0;
+	while(i<h){
+		int j = 0;
+		while(j<w){
+			//printf("-%dx%d\n", i, j);
+			if((h-i-1)==j){
+				//printf("-%dx%d\n", i, j);
+				diag_p *= M[i][j];
+			}
+			if(M[i][j]<M[min_i][min_j]){
+				min_i = i;
+				min_j = j;
+			}
+			j++;
+		}
+		i++;
+	}
 
 	//Записываем туда, где мин. элемент, произведение
 
-	/*написать*/
+	M[min_i][min_j] = diag_p;
+
 
 }
 
-int main(void)
+int main(int argc, char ** argv)
 {
 	int w, h;
-	int ** M = freadmatr("/home/sharky/testmatr.txt", &w, &h);
+	if(argc < 2){
+		printf("ERR: FILE NOT SPECIFIED\n");
+		return 9;
+	}
+	int ** M = freadmatr(argv[1], &w, &h);
 	if (!M)
 		return 10;
 
 	printf("%dx%d\n\n", w, h);
 	printmatr(M, w, h);
-	do_work(M,w,h);
+	do_work(M, w, h);
 	printf("\n\n");
-	printmatr(M,w,h);
+	printmatr(M, w, h);
 
 	return 0;
 }
